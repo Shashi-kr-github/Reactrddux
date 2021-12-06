@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+
+import { useDispatch, useSelector } from "react-redux";
 import './App.css';
+import { TODOS } from "./components/Todos";
+import { TODOB } from "./components/Todos2";
+import { decCounter, incCounter } from './stores/action';
+import { store } from './stores/store';
+
+
+
 
 function App() {
+  const dispatch = useDispatch();
+  const count = useSelector(store => store.count);
+  
+  console.log(store.getState())
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>COUNT : {count}</h1>
+      <button 
+        onClick ={ () => {
+          dispatch(incCounter(2))
+        }}
+      >ADD</button>
+      <button
+      onClick = { () => {
+        dispatch(decCounter(1));
+      }}
+      >SUB</button>
+      <div>
+        <TODOS></TODOS>
+      </div>
+      <hr></hr>
+      <div>
+       
+      </div>
     </div>
   );
 }
